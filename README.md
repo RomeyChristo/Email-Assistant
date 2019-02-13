@@ -16,12 +16,12 @@ An Email assistant for the Visually challenged people which has speech recogniti
 6. Follow the instructions on the screen
 
 ## How to use
-Say, 
-READ INSTRUCTIONS to listen to the instructions.
-MAIL FROM followed by your/sender's name. CLEAR FROM NAME to erase sender's address.
-MAIL TO followed by receiver's address. CLEAR TO ADDRESS to erase receiver's address.
-STARTfollowed by the email content.
-CARBON COPY followed by cc address. CLEAR CC to erase cc address.
-BCC followed by bcc address. CLEAR BCC to erase bcc address.
-READ MAIL to listen to the mail. CLEAR MAIL to erase the content.
+Say, <br/>
+READ INSTRUCTIONS to listen to the instructions.<br/>
+MAIL FROM followed by your/sender's name. CLEAR FROM NAME to erase sender's address.<br/>
+MAIL TO followed by receiver's address. CLEAR TO ADDRESS to erase receiver's address.<br/>
+STARTfollowed by the email content.<br/>
+CARBON COPY followed by cc address. CLEAR CC to erase cc address.<br/>
+BCC followed by bcc address. CLEAR BCC to erase bcc address.<br/>
+READ MAIL to listen to the mail. CLEAR MAIL to erase the content.<br/>
 Recitation of content after each command will be done for self clarification
