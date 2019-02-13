@@ -1,0 +1,1 @@
+Download Demo_europarl-EN model from https://drive.google.com/drive/folders/0B7BsN5f2F1fZQnFsbzJ3TWxxMms and paste it in this folder(models).

@@ -1,0 +1,1 @@
+download language tool from https://languagetool.org/download/LanguageTool-4.4.zip and extract it in this folder
