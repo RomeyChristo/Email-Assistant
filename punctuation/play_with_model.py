@@ -34,7 +34,6 @@ def sendmailfoo(msg):
     newbcc=BCC.split(",")
     for i in range(0,len(newbcc)):
         newbcc[i]="<"+newbcc[i]+">"
-    #SERVER = "localhost:1025"
     fto=",".join(newto)
     fcc=",".join(newcc)
     fbcc=",".join(newbcc)
@@ -45,7 +44,7 @@ def sendmailfoo(msg):
     TEXT = result[5]
     TO=TOA.split(",")+CC.split(",")+BCC.split(",")
     message = "From: " + from_addr + "\nTo: " + fto + "\nCC: " + fcc + "\nBCC: " + fbcc + "\nMIME-Version: 1.0\nContent-type: text/html\nSubject: " + SUBJECT + "\n" + TEXT
-    def sendemail(login='', password='', smtpserver=''):
+    def sendemail(login='*add login here*', password='*add password here*', smtpserver='*add smtpserver here*'):
         server = smtplib.SMTP(smtpserver)
         server.starttls()
         server.login(login,password)    
