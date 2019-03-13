@@ -9,7 +9,7 @@ An Email assistant for the Visually challenged people which has speech recogniti
 5. Open grammar folder and use the readme to find the link to download language tool. Extract the contents in the grammar folder.
 6. Make sure to use Mailjet or any other service to get login, password, and smtp server address. Insert it in line 47 of play_with_model.py
 
-## Installation
+## Run
 1. Run the server_start.bat
 2. Open punctuation folder and run play_with_model.py ( supports only python 2.7)
 4. Open grammar folder and run start_langtool.bat
