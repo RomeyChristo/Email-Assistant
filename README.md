@@ -11,7 +11,7 @@ An Email assistant for the Visually challenged people which has speech recogniti
 
 ## Run
 1. Run the server_start.bat
-2. Open punctuation folder and run play_with_model.py [ application works only on python 2.7 ]
+2. Open punctuation folder and run play_with_model.py ( application works only on python 2.7 )
 4. Open grammar folder and run start_langtool.bat
 5. Open Chrome browser and go to localhost:8000
 6. Follow the instructions on the screen
