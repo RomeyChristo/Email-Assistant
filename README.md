@@ -2,7 +2,7 @@
 
 An Email assistant for the Visually challenged people which has speech recognition and speech synthesis. The web application recognizes voice commands for interacting with the application. It can format the mail, fix grammar and add punctuation.
 ## Setup
-1. Install Python 2.7 or use Anaconda [application works only on python 2.7]
+1. Install Python 2.7 or use Anaconda 
 2. Download the files and extract it in a local directory
 3. Run the installation.bat and wait for the modules to be installed
 4. Open punctuation folder>models folder and use the readme.txt to find the link to download the models
@@ -11,7 +11,7 @@ An Email assistant for the Visually challenged people which has speech recogniti
 
 ## Run
 1. Run the server_start.bat
-2. Open punctuation folder and run play_with_model.py ( supports only python 2.7)
+2. Open punctuation folder and run play_with_model.py [ application works only on python 2.7 ]
 4. Open grammar folder and run start_langtool.bat
 5. Open Chrome browser and go to localhost:8000
 6. Follow the instructions on the screen
