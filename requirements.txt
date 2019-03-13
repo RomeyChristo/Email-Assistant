@@ -1,0 +1,3 @@
+requests
+theano
+websocket_server
