@@ -228,7 +228,7 @@ def punctuate(predict, word_vocabulary, punctuation_vocabulary, reverse_punctuat
 
     return output
 
-model_file = "F:\PRojects\Email-Assistant\punctuator2-master\models\Demo-Europarl-EN.pcl"
+model_file = "(enter_path_here)\Demo-Europarl-EN.pcl"
 show_unk = False
 
 x = T.imatrix('x')
