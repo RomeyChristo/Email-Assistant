@@ -71,9 +71,14 @@ function splitw(wildcard) {
 	}
 }
 
+
+
 //end of functions
 const artyom = new Artyom();
 //no cases
+
+
+
 artyom.on(['stop', 'next line']).then((i) => {
 	switch (i) {
 
@@ -89,40 +94,118 @@ artyom.on(['stop', 'next line']).then((i) => {
 	}
 });
 //commands in cases
-artyom.on(['start *', 'mail from *', 'to address *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *','subject *','mail to *'], true).then((i, wildcard) => {
+function questions(){
+	if(document.getElementById("froma").value == ""){
+		artyom.say("Please tell your first name")
+		}
+	else if(document.getElementById("recname").value == ""){
+		artyom.say("Please tell your recipient's first name")
+		}
+	else if(document.getElementById("subj").value == ""){
+		artyom.say("Say the subject")
+		}	
+	else if(document.getElementById("toa").value == ""){
+		artyom.say("What is the recipients mail address?")
+		}		
+	else if(document.getElementById("cca").value == ""){
+		artyom.say("Is there a cc address?")
+		}	
+	else if(document.getElementById("bcca").value == ""){
+		artyom.say("Is there a bcc address?")
+		}	
+	else if(document.getElementById("note-textarea").value == ""){
+		artyom.say("Please recite the mail content")
+		}	
+		setInterval(function() {
+			
+			
+		  			
+	artyom.on(['*'], true).then((i,wildcard) => {
+		switch (i) {
+			case 0:
+				if(document.getElementById("froma").value == ""){
+					document.getElementById("froma").value += wildcard;
+					joinwords();
+					artyom.say("You've said : " + wildcard);
+					return		
+					}
+				else if(document.getElementById("recname").value == ""){
+					document.getElementById("recname").value += wildcard;
+					joinwords();
+					artyom.say("You've said : " + wildcard);
+					return
+					}
+				else if(document.getElementById("subj").value == ""){
+					document.getElementById("subj").value += wildcard;
+					artyom.say("You've said : " + wildcard);
+					return
+					}
+				else if(document.getElementById("toa").value == ""){
+					document.getElementById("toa").value += wildcard+",";
+					joinwords();
+					splitw(wildcard);
+					return
+					}	
+				else if(document.getElementById("cca").value == ""){
+					if(wildcard =="no")
+					{
+						document.getElementById("cca").value += "   "
+					}
+					else{
+					document.getElementById("cca").value += wildcard+",";
+					joinwords();
+					splitw(wildcard);
+					return}
+					}
+				else if(document.getElementById("bcca").value == ""){
+					if(wildcard =="no")
+					{
+						document.getElementById("bcca").value += "   "
+						return
+					}
+					else{
+					document.getElementById("bcca").value += wildcard+",";
+					joinwords();
+					splitw(wildcard);
+					return}
+					}
+				else if(document.getElementById("note-textarea").value == ""){
+					document.getElementById("note-textarea").value += wildcard;
+					artyom.say("You've said : " + wildcard);
+					return
+				}
+		}
+	});
+}, 1000);
+}
+
+	//['start *', 'from*', 'to address *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *','subject *','mail to *']
+artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *',], true).then((i, wildcard) => {
 	switch (i) {
 		case 0:
 			document.getElementById("note-textarea").value += wildcard;
 			artyom.say("You've said : " + wildcard);
 			break;
 		case 1:
-			//aname=wildcard.charAt(0).toUpperCase();
-			document.getElementById("froma").value += wildcard;
-			joinwords();
-			artyom.say("You've said : " + wildcard);
-			break;
-		case 2:
-			document.getElementById("toa").value += wildcard+",";
-			joinwords();
-			splitw(wildcard);
-			break;
-		case 3:
 			document.getElementById("cca").value += wildcard+",";
 			joinwords();
 			splitw(wildcard);
 			break;
-		case 4:
-		case 5:
+		case 2:
+		case 3:
 			document.getElementById("bcca").value += wildcard+",";
 			joinwords();
 			splitw(wildcard);
 			break;
-		case 6:
+		case 4:
 			if (wildcard === "mail") {
 				document.getElementById("note-textarea").value = '';
 				artyom.say("content cleared");
 			} else if (wildcard === "my name") {
 				document.getElementById("froma").value = '';
+				artyom.say("content cleared");
+			} else if (wildcard === "receivers name") {
+				document.getElementById("recname").value = '';
 				artyom.say("content cleared");
 			} else if (wildcard === "to address") {
 				document.getElementById("toa").value = '';
@@ -130,7 +213,7 @@ artyom.on(['start *', 'mail from *', 'to address *', 'carbon copy *', 'bcece *',
 			} else if (wildcard === "carbon copy") {
 				document.getElementById("cca").value = '';
 				artyom.say("content cleared");
-			} else if (wildcard === "bcc") {
+			} else if (wildcard === "bcece") {
 				document.getElementById("bcca").value = '';
 				artyom.say("content cleared");
 			}
@@ -139,7 +222,7 @@ artyom.on(['start *', 'mail from *', 'to address *', 'carbon copy *', 'bcece *',
 				artyom.say("content cleared");
 			}
 			break;
-		case 7:
+		case 5:
 			if (wildcard === "instructions") {
 				var text = document.getElementById("insp").textContent;
 				artyom.say(text);
@@ -172,17 +255,10 @@ artyom.on(['start *', 'mail from *', 'to address *', 'carbon copy *', 'bcece *',
 				splitw(text);
 			}
 			break;
-		case 8:
-			document.getElementById("subj").value += wildcard;
-			artyom.say("You've said : " + wildcard);
-			break;
-		case 9:
-			document.getElementById("recname").value += wildcard;
-			joinwords();
-			artyom.say("You've said : " + wildcard);
-			break;
+		
 	}
 });
+
 
 // Start the commands !
 artyom.initialize({
@@ -204,6 +280,12 @@ artyom.initialize({
 artyom.say("Hello", {
 	onStart: () => {
 		console.log("Reading ...");
+		//questions();
+		setInterval(function() {
+			// method to be executed;
+			questions();
+		  }, 12000);
+		
 	},
 	onEnd: () => {
 		console.log("No more text to talk");
