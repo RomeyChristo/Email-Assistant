@@ -1,6 +1,6 @@
 //functions
-
-
+jsps = null;
+jsss = null;
 split_string = [];
 split_string_index = 0;
 punctuated_split_string = []
@@ -24,21 +24,24 @@ $(document).ready(function () {
 		send_next_string();
 
 	};
+	function punce(){
+			//alert("The paragraph was clicked.");
+			
+			split_string_index = 0;
+			split_string = [$("#note-textarea").val()]//.split("\n");
+			punctuated_split_string = [];
+			send_next_string();		
+			
+	}
+	jsps=punce;
 
-	$("#punc").click(function (e) {
-		//alert("The paragraph was clicked.");
-		e.preventDefault();
-		split_string_index = 0;
-		split_string = [$("#note-textarea").val()]//.split("\n");
-		punctuated_split_string = [];
-		send_next_string();
-		
-	});
-	$("#mail").click(function (e) {
-		//alert("The paragraph was clicked.");
-		e.preventDefault();
-		webSocket.send("mail:" + $("#froma").val() + "||" +$("#toa").val() + "||" +  $("#cca").val() + "||" +  $("#bcca").val() + "||" +  $("#subj").val() + "||" +$("#note-textarea").val());		
-	});
+	function sendce(){
+			//alert("The paragraph was clicked.");
+			
+			webSocket.send("mail:" + $("#froma").val() + "||" +$("#toa").val() + "||" +  $("#cca").val() + "||" +  $("#bcca").val() + "||" +  $("#subj").val() + "||" +$("#note-textarea").val());
+	}
+	jsss=sendce;
+
 	function send_next_string() {
 		if (split_string_index < split_string.length) {
 			webSocket.send("punc:" + split_string[split_string_index++] + " .");		
@@ -52,6 +55,7 @@ $(document).ready(function () {
 		}
 	}
 });
+
 
 
 function joinwords() {
@@ -71,29 +75,49 @@ function splitw(wildcard) {
 	}
 }
 
+function clearall(){
+	flag = 0;
+	flag2 = 0;
+	document.getElementById("note-textarea").value = '';
+	document.getElementById("froma").value = '';
+	document.getElementById("recname").value = '';
+	document.getElementById("toa").value = '';
+	document.getElementById("cca").value = '';
+	document.getElementById("bcca").value = '';
+	document.getElementById("subj").value = '';
+	artyom.say("cleared all content");
 
+}
 
 //end of functions
 const artyom = new Artyom();
 //no cases
 
 
+function js_punc(){
+	jsps();
+}
 
-artyom.on(['stop', 'next line']).then((i) => {
+function js_send(){
+	jsss();
+}
+
+artyom.on(['punctuate', 'send mail']).then((i) => {
 	switch (i) {
 
 		case 0:
-			artyom.shutUp();
+			artyom.say("punctuating")
+			js_punc();
 			break;
 		case 1:
-			//document.getElementById("note-textarea").innerHTML += '.'+'\n';
-			document.getElementById("note-textarea").value += '\n';
-			console.log("done");
-			//artyom.say("new line");
+			artyom.say("sending")
+			js_send();
 			break;
 	}
 });
 //commands in cases
+flag= 0;
+flag2=0;
 function questions(){
 	if(document.getElementById("froma").value == ""){
 		artyom.say("Please tell your first name")
@@ -115,7 +139,22 @@ function questions(){
 		}	
 	else if(document.getElementById("note-textarea").value == ""){
 		artyom.say("Please recite the mail content")
-		}	
+		}
+	else if(flag==0){
+		
+		artyom.say("Shall I finalize")
+	}	
+	else if(flag==2){
+		artyom.say("Mail Content")
+	}
+	else if(flag2==0){
+		document.getElementById("note-textarea").value = "Dear "+document.getElementById("recname").value+", "+"\n"+ document.getElementById("note-textarea").value
+		artyom.say("shall i send")
+	}
+
+	else{
+		artyom.say("Do you want to send another new mail")
+	}
 		setInterval(function() {
 			
 			
@@ -174,6 +213,50 @@ function questions(){
 					artyom.say("You've said : " + wildcard);
 					return
 				}
+				else if(flag == 0){
+					if(wildcard == "yes"){
+						js_punc();
+						flag =1 ;
+					}
+					else if(wildcard == "no"){
+						flag = 2;
+						return
+
+					}
+				}
+				else if(flag==2){
+					if(wildcard=="no"){
+						flag=0;
+					}
+					else{
+						document.getElementById("note-textarea").value += wildcard;
+						flag=0;
+						return
+					}
+				}
+				else if(flag2 == 0){
+					if(wildcard=="yes"){
+						js_send();
+						artyom.say("Mail sent successfully");
+						flag2=1;
+
+
+					}
+					else{
+						flag2=0;
+						return
+					}
+				}
+				else{
+					if(wildcard == "yes")
+					{
+					clearall();
+				}
+				else{
+					return
+				}
+			}
+		
 		}
 	});
 }, 1000);
@@ -200,6 +283,8 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *',]
 		case 4:
 			if (wildcard === "mail") {
 				document.getElementById("note-textarea").value = '';
+				flag=0;
+				flag2=0;
 				artyom.say("content cleared");
 			} else if (wildcard === "my name") {
 				document.getElementById("froma").value = '';
@@ -220,6 +305,10 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *',]
 			else if (wildcard === "subject") {
 				document.getElementById("subj").value = '';
 				artyom.say("content cleared");
+			}
+			else if (wildcard === "all"){
+				clearall();
+
 			}
 			break;
 		case 5:
