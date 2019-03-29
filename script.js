@@ -148,7 +148,6 @@ function questions(){
 		artyom.say("Mail Content")
 	}
 	else if(flag2==0){
-		document.getElementById("note-textarea").value = "Dear "+document.getElementById("recname").value+", "+"\n"+ document.getElementById("note-textarea").value
 		artyom.say("shall i send")
 	}
 
@@ -182,7 +181,7 @@ function questions(){
 				else if(document.getElementById("toa").value == ""){
 					document.getElementById("toa").value += wildcard+",";
 					joinwords();
-					splitw(wildcard);
+					//splitw(wildcard);
 					return
 					}	
 				else if(document.getElementById("cca").value == ""){
@@ -193,7 +192,7 @@ function questions(){
 					else{
 					document.getElementById("cca").value += wildcard+",";
 					joinwords();
-					splitw(wildcard);
+					//splitw(wildcard);
 					return}
 					}
 				else if(document.getElementById("bcca").value == ""){
@@ -205,7 +204,7 @@ function questions(){
 					else{
 					document.getElementById("bcca").value += wildcard+",";
 					joinwords();
-					splitw(wildcard);
+					//splitw(wildcard);
 					return}
 					}
 				else if(document.getElementById("note-textarea").value == ""){
@@ -236,6 +235,7 @@ function questions(){
 				}
 				else if(flag2 == 0){
 					if(wildcard=="yes"){
+						document.getElementById("note-textarea").value = "Dear "+document.getElementById("recname").value+", "+ document.getElementById("note-textarea").value
 						js_send();
 						artyom.say("Mail sent successfully");
 						flag2=1;
@@ -263,7 +263,7 @@ function questions(){
 }
 
 	//['start *', 'from*', 'to address *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *','subject *','mail to *']
-artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *',], true).then((i, wildcard) => {
+artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'delete *', 'read *',], true).then((i, wildcard) => {
 	switch (i) {
 		case 0:
 			document.getElementById("note-textarea").value += wildcard;
@@ -350,6 +350,7 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'clear *', 'read *',]
 
 
 // Start the commands !
+
 artyom.initialize({
 	lang: "en-GB", // GreatBritain english
 	continuous: true, // Listen forever
@@ -366,18 +367,25 @@ artyom.initialize({
 	console.error("Artyom couldn't be initialized: ", err);
 });
 
-artyom.say("Hello", {
-	onStart: () => {
-		console.log("Reading ...");
-		//questions();
+artyom.say("Hello",{
+    onStart:function(){
+        // Don't obey any command
+		artyom.dontObey();
 		setInterval(function() {
 			// method to be executed;
 			questions();
-		  }, 12000);
+		  }, 13000);
 		
 	},
-	onEnd: () => {
-		console.log("No more text to talk");
-
+    
+		
+		//questions();
+		
+	onEnd: function(){
+        setTimeout(function(){
+            // Allow to process commands again
+            artyom.obey();
+        },7000);
 	}
-});
+	});
+	
