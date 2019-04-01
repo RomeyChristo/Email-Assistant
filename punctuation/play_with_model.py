@@ -6,6 +6,7 @@ import models
 import data
 import re
 import theano
+import time
 import sys
 import codecs
 import smtplib
@@ -34,17 +35,20 @@ def sendmailfoo(msg):
     newbcc=BCC.split(",")
     for i in range(0,len(newbcc)):
         newbcc[i]="<"+newbcc[i]+">"
+    #SERVER = "localhost:1025"
     fto=",".join(newto)
     fcc=",".join(newcc)
     fbcc=",".join(newbcc)
     FROM = 'user@emailassist.ml'
-
+    #TO = ['romeo2696@gmail.com',"hello@gmail.com"] # must be a list
+    #CC = ['romeo2696@gmail.com',"hello@gmail.com"] # must be a list
+    #BCC = ['romeo2696@gmail.com',"hello@gmail.com"] # must be a list
     from_addr = "%s<user@emailassist.ml>" % sender 
     SUBJECT = result[4]
     TEXT = result[5]
     TO=TOA.split(",")+CC.split(",")+BCC.split(",")
     message = "From: " + from_addr + "\nTo: " + fto + "\nCC: " + fcc + "\nBCC: " + fbcc + "\nMIME-Version: 1.0\nContent-type: text/html\nSubject: " + SUBJECT + "\n" + TEXT
-    def sendemail(login='*add login here*', password='*add password here*', smtpserver='*add smtpserver here*'):
+    def sendemail(login='02466d156d8279f8c94edf1c02222a88', password='c72285a89a822843418f4e34db66e97f', smtpserver='in-v3.mailjet.com:587'):
         server = smtplib.SMTP(smtpserver)
         server.starttls()
         server.login(login,password)    
@@ -56,14 +60,16 @@ def sendmailfoo(msg):
 def grammarfix(data,reply):
     x=len(json.loads(reply)["matches"])
     b = data["text"]
-
+    #print b
+    #print b[2:9]
     errnew=[]
     def perrnew():
         errnew.append(errw)
     for i in range(x-1, -1,-1):
         #print(i)
         val = json.loads(reply)["matches"][i]["replacements"][0]["value"]
-
+        #textval =  "value is " 
+        #print textval+val
         off = json.loads(reply)["matches"][i]["offset"]
         #print "off %d" %off
         lenof = json.loads(reply)["matches"][i]["length"]
@@ -121,7 +127,9 @@ def new_client(client, server):
 
 def message_received(client, server, msg):
     if msg[0:5]=="punc:":
+        start_time = time.time()
         punctuate_message(msg[5:],client,server)
+        print("--- %s seconds ---" % (time.time() - start_time))
     elif msg[0:5]=="mail:":
         sendmailfoo(msg[5:])
 
@@ -228,7 +236,7 @@ def punctuate(predict, word_vocabulary, punctuation_vocabulary, reverse_punctuat
 
     return output
 
-model_file = "(enter_path_here)\Demo-Europarl-EN.pcl"
+model_file = "F:\PRojects\Email-Assistant\punctuator2-master\models\Demo-Europarl-EN.pcl"
 show_unk = False
 
 x = T.imatrix('x')
