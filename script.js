@@ -102,19 +102,19 @@ function js_send(){
 	jsss();
 }
 
-artyom.on(['punctuate', 'send mail']).then((i) => {
-	switch (i) {
+//artyom.on(['punctuate', 'send mail']).then((i) => {
+//	switch (i) {
 
-		case 0:
-			artyom.say("punctuating")
-			js_punc();
-			break;
-		case 1:
-			artyom.say("sending")
-			js_send();
-			break;
-	}
-});
+//		case 0:
+//			artyom.say("punctuating")
+//			js_punc();
+//			break;
+//		case 1:
+//			artyom.say("sending")
+//			js_send();
+//			break;
+//	}
+// /});
 //commands in cases
 flag= 0;
 flag2=0;
@@ -228,7 +228,7 @@ function questions(){
 						flag=0;
 					}
 					else{
-						document.getElementById("note-textarea").value += wildcard;
+						document.getElementById("note-textarea").value += " "+wildcard;
 						flag=0;
 						return
 					}
@@ -312,7 +312,7 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'delete *', 'read *',
 			}
 			break;
 		case 5:
-			if (wildcard === "instructions") {
+			if (wildcard === "the instructions") {
 				var text = document.getElementById("insp").textContent;
 				artyom.say(text);
 
@@ -367,7 +367,7 @@ artyom.initialize({
 	console.error("Artyom couldn't be initialized: ", err);
 });
 
-artyom.say("Hello",{
+artyom.say("Say Reed the Instructions if you want to know the instructions",{
     onStart:function(){
         // Don't obey any command
 		artyom.dontObey();
