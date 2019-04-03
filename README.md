@@ -19,11 +19,9 @@ An Email assistant for the Visually challenged people which has speech recogniti
 
 ## How to use
 Say, <br/>
-READ INSTRUCTIONS to listen to the instructions.<br/>
-MAIL FROM followed by your/sender's name. CLEAR FROM NAME to erase sender's address.<br/>
-MAIL TO followed by receiver's address. CLEAR TO ADDRESS to erase receiver's address.<br/>
-STARTfollowed by the email content.<br/>
-CARBON COPY followed by cc address. CLEAR CC to erase cc address.<br/>
-BCC followed by bcc address. CLEAR BCC to erase bcc address.<br/>
-READ MAIL to listen to the mail. CLEAR MAIL to erase the content.<br/>
-Recitation of content after each command will be done for self clarification
+Point</b> for full stop</br>
+<b>Smiley face</b> to get a smiley face</br>
+<b>At the rate of</b> to get @ symbol</br>
+<b>Read Mail</b> to listen to the mail.<br>
+<b>Delete Mail</b> to delete the mail content. </br>
+<i>Recitation of content after each command will be done for self clarification</i>
