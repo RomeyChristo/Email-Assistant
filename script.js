@@ -89,6 +89,24 @@ function clearall(){
 
 }
 
+function underscoreto() {
+	var strus = document.getElementById("toa").value; 
+	var resus = strus.replace("underscore", "_");
+	document.getElementById("toa").value = resus;
+  } 
+
+function underscorecc() {
+	var strus = document.getElementById("cca").value; 
+	var resus = strus.replace("underscore", "_");
+	document.getElementById("cca").value = resus;
+  } 
+
+function underscorebcc() {
+	var strus = document.getElementById("bcca").value; 
+	var resus = strus.replace("underscore", "_");
+	document.getElementById("bcca").value = resus;
+  } 
+
 //end of functions
 const artyom = new Artyom();
 //no cases
@@ -181,6 +199,7 @@ function questions(){
 				else if(document.getElementById("toa").value == ""){
 					document.getElementById("toa").value += wildcard+",";
 					joinwords();
+					underscoreto();
 					//splitw(wildcard);
 					return
 					}	
@@ -192,6 +211,7 @@ function questions(){
 					else{
 					document.getElementById("cca").value += wildcard+",";
 					joinwords();
+					underscorecc();
 					//splitw(wildcard);
 					return}
 					}
@@ -204,6 +224,7 @@ function questions(){
 					else{
 					document.getElementById("bcca").value += wildcard+",";
 					joinwords();
+					underscorebcc();
 					//splitw(wildcard);
 					return}
 					}
@@ -273,12 +294,14 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'delete *', 'read *',
 			document.getElementById("cca").value += wildcard+",";
 			joinwords();
 			splitw(wildcard);
+			underscorecc();
 			break;
 		case 2:
 		case 3:
 			document.getElementById("bcca").value += wildcard+",";
 			joinwords();
 			splitw(wildcard);
+			underscorebcc();
 			break;
 		case 4:
 			if (wildcard === "mail") {
@@ -298,7 +321,7 @@ artyom.on(['start *', 'carbon copy *', 'bcece *', 'bcc *', 'delete *', 'read *',
 			} else if (wildcard === "carbon copy") {
 				document.getElementById("cca").value = '';
 				artyom.say("content cleared");
-			} else if (wildcard === "bcece") {
+			} else if (wildcard === "black carbon copy") {
 				document.getElementById("bcca").value = '';
 				artyom.say("content cleared");
 			}
